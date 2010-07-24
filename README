@@ -1,0 +1,99 @@
+Data-Ink Ratio Analysis
+2005
+@author Paco Nathan <ceteri@gmail.com>
+
+See: Edward R. Tufte, The Visual Display of Quantitative Data,
+Graphics Press, 1983, pp. 91-105.
+http://www.edwardtufte.com/tufte/books_vdqi
+
+
+	- Step 1 -
+
+Use a screen capture tool to grab the image for some part of a GUI
+that you wish to analyze for "Data-Ink Ratio".
+
+In the example here, there is an screen capture file at:
+
+   UserPreferences_1.png
+
+Be sure to deselect any text or menu items, before the screen capture.
+Otherwise those elements may have inverted colors later, such as white
+on black.
+
+It is best to save the image as a simple image file: PNG, GIF, BMP
+
+
+	- Step 2 -
+
+Convert the image into mostly "black and white".  However, simply
+converting to B&W may cause too much distortion.  It is best to use an
+image editing tool to:
+
+   * decrease the saturation
+   * increase the contrast
+
+...until the image appears monochromatic.  The analysis tool uses a
+histogram, so background colors or "feathering" (sometimes called "3D"
+GUI components) will not affect the metric.
+
+In the example here, there is a converted image file at:
+
+   UserPreferences_2.png
+
+
+	- Step 3 -
+
+Use an image editing tool to erase all of the "data" elements from the
+image.
+
+In the example here, there is an image file with the data erased at:
+
+   UserPreferences_3.png
+
+
+	- Step 4 -
+
+Use an image editing tool to erase all of the "label" elements from
+the image.
+
+In the example here, there is an image file with the data erased at:
+
+   UserPreferences_4.png
+
+
+	- Step 5 -
+
+Use a Java compiler to run the analysis tool:
+
+   javac DataInk.java
+   java DataInk UserPreferences_2.png
+   java DataInk UserPreferences_3.png
+   java DataInk UserPreferences_4.png
+
+
+	- Step 6 -
+
+Copy and paste the analysis table for each image into an Excel
+spreadsheet.
+
+It is best to use the "Edit / Paste Special... / As Text" option,
+otherwise Excel may not allow the table data to be pasted directly
+into a spreadsheet.
+
+In the example here, there is a spreadsheet document at:
+
+   data-ink.xls
+
+Then use the spreadsheet to calculate measurements for the Data-Ink
+Ratio, as shown in the example.
+
+It will be necessary to decided where in the RGB continuum to
+distinguish between "white" pixels and "black" pixels.  In the example
+here, the value 0x7FFFFF is chosen (middle gray) as the boundary for
+colors called "black".
+
+Since too much emphasis on data labels can confuse a UI design, it is
+important to calculate metrics for both cases:
+
+   * "ink" - "data"
+   * "ink" - ("data" + "label")
